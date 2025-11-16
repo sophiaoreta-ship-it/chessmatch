@@ -1,0 +1,14 @@
+{
+    "name": "chess-attack",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Chess Attack Match game",
+    "scripts": {
+        "dev": "cd chess-attack-match && npm run dev",
+        "build": "cd chess-attack-match && npm run build",
+        "preview": "cd chess-attack-match && npm run preview"
+    },
+    "workspaces": [
+        "chess-attack-match"
+    ]
+}
