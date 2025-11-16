@@ -20,8 +20,8 @@ export const HUD = ({
     levelNumber,
     movesLeft,
     goalProgressLabel,
-    board,
-    onHint,
+    board: _board,
+    onHint: _onHint,
 }: HUDProps) => {
     const [isHelpOpen, setIsHelpOpen] = useState(false)
     const level = useGameStore((state) => state.level)

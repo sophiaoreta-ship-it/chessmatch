@@ -9,7 +9,6 @@ import { soundManager } from '../game/sounds'
 import { ScorePopup } from './ScorePopup'
 import { ScreenShake } from './ScreenShake'
 import { LevelEnvironment } from './LevelEnvironment'
-import { getLevelTheme } from '../game/levelThemes'
 import type { Tile as TileType } from '../game/types'
 
 // Hint delay: 15 seconds of user inactivity
@@ -33,9 +32,6 @@ export const Board = () => {
     const attemptSwap = useGameStore((state) => state.attemptSwap)
     const removeScorePopup = useGameStore((state) => state.removeScorePopup)
     const boardRef = useRef<HTMLDivElement>(null)
-
-    // Get theme for dynamic environment
-    const theme = useMemo(() => getLevelTheme(level.goal), [level.goal])
 
     const [clueTiles, setClueTiles] = useState<string[]>([])
     const [interactionCount, setInteractionCount] = useState(0)

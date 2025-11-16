@@ -70,19 +70,19 @@ type TileProps = {
 export const Tile = ({
     tile,
     isSelected,
-    isPreview,
+    isPreview: _isPreview,
     isPopping,
     isMatched = false, // Default value
     tileMovement,
     swapMovement,
     isDisabled,
     isClue,
-    isHovered = false,
-    isPotentialPattern = false,
-    isSnapped = false,
+    isHovered: _isHovered = false,
+    isPotentialPattern: _isPotentialPattern = false,
+    isSnapped: _isSnapped = false,
     isInvalid = false,
-    isSoftHint = false,
-    softHintType = null,
+    isSoftHint: _isSoftHint = false,
+    softHintType: _softHintType = null,
     onPointerDown,
     onPointerEnter,
     onPointerLeave,
@@ -91,7 +91,6 @@ export const Tile = ({
     // Use state to trigger gravity animation
     // Start at FROM position, then animate to TO position (0)
     const [gravityTransform, setGravityTransform] = useState<string>('')
-    const [shouldBounce, setShouldBounce] = useState(false)
 
     useEffect(() => {
         if (tileMovement && !swapMovement) {
@@ -112,28 +111,14 @@ export const Tile = ({
 
             // Set initial position first
             setGravityTransform(`translateY(${initialTranslateY}%)`)
-            setShouldBounce(false)
 
             // Then animate to 0 after a brief moment
             const timeout = setTimeout(() => {
                 setGravityTransform('translateY(0%)')
-
-                // Trigger bounce after landing (only for falling tiles, not new tiles)
-                if (!tileMovement.isNewTile && tileMovement.toRow > tileMovement.fromRow) {
-                    // Bounce after gravity animation completes (180ms)
-                    setTimeout(() => {
-                        setShouldBounce(true)
-                        // Clear bounce after animation completes (150ms)
-                        setTimeout(() => {
-                            setShouldBounce(false)
-                        }, 150)
-                    }, 180) // After gravity animation completes
-                }
             }, 10) // Small delay to ensure initial transform is applied
             return () => clearTimeout(timeout)
         } else {
             setGravityTransform('')
-            setShouldBounce(false)
         }
     }, [tileMovement, swapMovement])
 
